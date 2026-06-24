@@ -4,217 +4,179 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mauro Peña — Sistemas de Captación & Conversión para Real Estate · Punta del Este</title>
+<title>Mauro Peña — Sistemas de Captación & Conversión para Real Estate</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- TIPOGRAFÍAS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ============ TOKENS PREMIUM ============ */
+/* ============ PALETA PUNTA DEL ESTE ============ */
 :root{
-  --bg:#F8F6F1;
-  --bg-dark:#0B0F17;
-  --ink:#0E1420;
-  --ink-soft:#5C6472;
-  --line:rgba(14,20,32,0.12);
-  --clay:#B0764A;
-
-  --ease:cubic-bezier(.22,1,.36,1);
-  --shadow:0 40px 90px -50px rgba(0,0,0,0.35);
+  --bg: #F7F5F0;
+  --sand: #EDE6DA;
+  --ocean: #0E3A5B;
+  --ocean-soft: #2D6F8E;
+  --gold: #C8A45D;
+  --ink: #0E1218;
+  --muted: #6B7280;
+  --line: #E6DED2;
+  --white: #ffffff;
+  --shadow: 0 30px 60px -30px rgba(0,0,0,.25);
+  --ease: cubic-bezier(.16,.84,.24,1);
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 
 body{
   margin:0;
-  font-family:'Inter',system-ui;
+  font-family:'Inter', sans-serif;
   background:var(--bg);
   color:var(--ink);
-  -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 
-/* ============ TYPOGRAPHY PREMIUM ============ */
-h1,h2{
+/* TITULOS LUXURY */
+h1,h2,h3{
   font-family:'Playfair Display', serif;
-  letter-spacing:-0.03em;
+  margin:0;
 }
 
-h1{
-  font-size:clamp(52px,7vw,96px);
-  line-height:0.95;
+/* ============ FIX CRÍTICO (NO QUEDARSE EN PORTADA) ============ */
+.reveal{
+  opacity:1 !important;
+  transform:none !important;
 }
 
-h2{
-  font-size:clamp(30px,4vw,54px);
-  line-height:1.05;
+/* animación opcional si JS funciona */
+.reveal.js-on{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .8s var(--ease);
+}
+.reveal.js-on.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
-/* ============ LAYOUT AIR ============ */
-.wrap{
-  max-width:1140px;
-  margin:0 auto;
-  padding:0 7vw;
-}
-
-.panel{
+/* ============ HERO ============ */
+.hero{
   min-height:100vh;
   display:flex;
   align-items:center;
-  padding:160px 0;
-  position:relative;
-}
-
-/* ============ HERO CINEMATIC ============ */
-#hero{
-  background:var(--bg-dark);
+  justify-content:center;
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(180deg, var(--ocean) 0%, #0B2235 100%);
   color:white;
-  overflow:hidden;
 }
 
-#hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url('https://images.unsplash.com/photo-1505842465776-3b4953ca4f9b') center/cover no-repeat;
-  opacity:0.35;
-  filter:contrast(1.1) grayscale(20%);
-  transform:scale(1.1);
+.hero h1{
+  font-size:clamp(42px,6vw,84px);
+  line-height:1.05;
 }
 
-#hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(176,118,74,0.35), transparent 40%),
-    linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
+.hero h1 span{
+  color:var(--gold);
 }
 
-#hero .wrap{
-  position:relative;
-  z-index:2;
-}
-
-#hero h1 em{
-  color:#C9A47A;
-  font-style:normal;
-}
-
-/* ============ SECTIONS ============ */
-.head{
-  max-width:760px;
-  margin-bottom:80px;
-}
-
-.lede{
-  color:var(--ink-soft);
+.hero p{
+  max-width:720px;
+  margin:20px auto 0;
+  color:rgba(255,255,255,.75);
   font-size:18px;
+}
+
+/* ============ SECCIONES ============ */
+section{
+  padding:100px 10%;
+}
+
+.section-title{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.subtitle{
+  color:var(--muted);
+  max-width:700px;
   line-height:1.6;
 }
 
-/* ============ CARDS PREMIUM ============ */
-.zone-card,
-.seg-card,
-.market-card{
-  border:none;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(18px);
-  border-radius:22px;
-  box-shadow:0 30px 80px -60px rgba(0,0,0,0.25);
-  transition:all .6s var(--ease);
+/* ============ CARDS ============ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  margin-top:40px;
 }
 
-.zone-card:hover{
-  transform:translateY(-8px);
+.card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow);
+  border-color:var(--gold);
+}
+
+.card h3{
+  color:var(--ocean);
+  margin-bottom:10px;
 }
 
 /* ============ KPI ============ */
 .kpi{
-  background:linear-gradient(145deg,#fff,#f3efe6);
-  border:none;
-  box-shadow:0 30px 70px -60px rgba(0,0,0,0.25);
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:40px;
 }
 
-/* ============ BUTTONS ============ */
-.cta-btn,
-.book-submit{
-  background:var(--ink);
-  border-radius:60px;
-  padding:18px 42px;
-  transition:all .4s var(--ease);
+.kpi div{
+  flex:1;
+  min-width:200px;
+  background:var(--sand);
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+}
+
+.kpi strong{
+  font-size:36px;
+  color:var(--gold);
+  display:block;
+}
+
+/* ============ CTA ============ */
+.cta{
+  background:var(--ocean);
   color:white;
-  border:none;
-  cursor:pointer;
+  text-align:center;
+  padding:80px 10%;
 }
 
-.cta-btn:hover,
-.book-submit:hover{
-  transform:translateY(-2px);
-  opacity:.9;
+.button{
+  display:inline-block;
+  margin-top:20px;
+  padding:16px 32px;
+  background:var(--gold);
+  color:#111;
+  border-radius:40px;
+  font-weight:600;
+  text-decoration:none;
 }
 
-/* ============ DIVIDERS ============ */
-hr.fine{
-  border:none;
-  height:1px;
-  background:linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent);
-}
-
-/* ============ REVEAL ============ */
-.reveal{
-  opacity:0;
-  transform:translateY(28px);
-  transition:all 1.1s var(--ease);
-}
-
-.reveal.is-visible{
-  opacity:1;
-  transform:none;
-}
-
-/* ============ TAGS ============ */
-.tag{
-  border:1px solid rgba(255,255,255,0.2);
-  color:#fff;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-}
-
-#hero .tag{
-  border-color:rgba(201,164,122,0.3);
-}
-
-/* ============ PHOTO ZONES ============ */
-.photo-zone{
-  border-radius:26px;
-  overflow:hidden;
-  box-shadow:0 40px 90px -70px rgba(0,0,0,0.4);
-}
-
-/* ============ FUNNEL / GEO ============ */
-.geo-pill,
-.fun-chip{
-  border-radius:999px;
-  background:rgba(255,255,255,0.6);
-  backdrop-filter:blur(12px);
-  border:1px solid var(--line);
-}
-
-/* ============ SCROLL BAR ============ */
-#progress{
-  background:var(--clay);
-  height:2px;
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:99;
+/* ============ FIX JS FALLBACK ============ */
+.no-js *{
+  opacity:1 !important;
+  transform:none !important;
 }
 
 </style>
@@ -222,28 +184,84 @@ hr.fine{
 
 <body>
 
-<div id="progress"></div>
+<!-- HERO -->
+<div class="hero reveal">
+  <div>
+    <h1>Más propiedades.<br><span>Más reservas.</span><br>Más inversores.</h1>
+    <p>Sistemas de captación y conversión para real estate en Punta del Este y mercados premium.</p>
+  </div>
+</div>
 
-<!-- ================= HERO ================= -->
-<section class="panel" id="hero">
-  <div class="wrap">
-    <h1>
-      Más propietarios.<br>
-      Más reservas.<br>
-      <em>Más compradores internacionales.</em>
-    </h1>
+<!-- PROBLEMA -->
+<section class="reveal">
+  <h2 class="section-title">El problema no es la demanda.</h2>
+  <p class="subtitle">
+    El problema es que la mayoría de inmobiliarias no tiene sistemas para capturarla, calificarla y convertirla.
+  </p>
 
-    <p class="lede" style="color:#d7d0c5;">
-      Sistemas de captación y conversión automatizados para real estate en Maldonado.
-    </p>
+  <div class="kpi">
+    <div><strong>80%</strong> Sin sistema digital real</div>
+    <div><strong>54%</strong> Marketing básico sin automatización</div>
+    <div><strong>26%</strong> Leads perdidos por falta de seguimiento</div>
+  </div>
+</section>
 
-    <div class="tag-row">
-      <span class="tag">Captación automática</span>
-      <span class="tag">IA conversacional</span>
-      <span class="tag">Leads calificados</span>
+<!-- SISTEMA -->
+<section class="reveal">
+  <h2 class="section-title">Sistema de conversión</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Captación</h3>
+      Meta Ads + Google Ads + tráfico internacional
+    </div>
+
+    <div class="card">
+      <h3>IA Conversacional</h3>
+      Responde, filtra y califica leads automáticamente
+    </div>
+
+    <div class="card">
+      <h3>CRM Inteligente</h3>
+      Seguimiento automático hasta la conversión
     </div>
   </div>
 </section>
+
+<!-- CTA -->
+<div class="cta reveal">
+  <h2>¿Querés ver cómo está tu sistema hoy?</h2>
+  <p>Te hago un diagnóstico completo sin costo.</p>
+  <a class="button" href="#">Agendar diagnóstico</a>
+</div>
+
+<script>
+
+/* ============ FIX CRÍTICO: asegurar visibilidad ============ */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const els = document.querySelectorAll(".reveal");
+
+  // fallback inmediato si no hay scroll/intersection
+  els.forEach(el => el.classList.add("visible"));
+
+  // intento animación si hay soporte
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add("visible");
+      }
+    });
+  },{threshold:0.15});
+
+  els.forEach(el=>{
+    el.classList.add("js-on");
+    io.observe(el);
+  });
+
+});
+
+</script>
 
 </body>
 </html>
