@@ -4,36 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mauro Peña — Sistemas de Captación & Conversión para Real Estate</title>
+<title>Mauro Peña | Real Estate Systems</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ============ PALETA PUNTA DEL ESTE ============ */
+/* ===================== PALeta PREMIUM OCEANO ===================== */
 :root{
-  --bg: #F7F5F0;
-  --sand: #EDE6DA;
-  --ocean: #0E3A5B;
-  --ocean-soft: #2D6F8E;
-  --gold: #C8A45D;
-  --ink: #0E1218;
-  --muted: #6B7280;
-  --line: #E6DED2;
-  --white: #ffffff;
-  --shadow: 0 30px 60px -30px rgba(0,0,0,.25);
-  --ease: cubic-bezier(.16,.84,.24,1);
+  --bg:#F6F2EA;
+  --dark:#0B2235;
+  --blue:#0E3A5B;
+  --gold:#C8A45D;
+  --text:#101820;
+  --muted:#6B7280;
+  --card:#FFFFFF;
+  --line:#E7DDCF;
+  --shadow:0 25px 60px -30px rgba(0,0,0,.25);
 }
 
 *{box-sizing:border-box;}
 
 body{
   margin:0;
-  font-family:'Inter', sans-serif;
+  font-family:Inter;
   background:var(--bg);
-  color:var(--ink);
-  overflow-x:hidden;
+  color:var(--text);
 }
 
 /* TITULOS LUXURY */
@@ -42,68 +38,51 @@ h1,h2,h3{
   margin:0;
 }
 
-/* ============ FIX CRÍTICO (NO QUEDARSE EN PORTADA) ============ */
-.reveal{
-  opacity:1 !important;
-  transform:none !important;
-}
-
-/* animación opcional si JS funciona */
-.reveal.js-on{
-  opacity:0;
-  transform:translateY(30px);
-  transition:all .8s var(--ease);
-}
-.reveal.js-on.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ============ HERO ============ */
+/* ===================== HERO ===================== */
 .hero{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:80px 20px;
-  background:linear-gradient(180deg, var(--ocean) 0%, #0B2235 100%);
+  padding:60px 20px;
+  background:linear-gradient(135deg,var(--dark),var(--blue));
   color:white;
 }
 
 .hero h1{
-  font-size:clamp(42px,6vw,84px);
+  font-size:clamp(40px,6vw,80px);
   line-height:1.05;
 }
 
-.hero h1 span{
+.hero span{
   color:var(--gold);
 }
 
 .hero p{
-  max-width:720px;
+  max-width:700px;
   margin:20px auto 0;
-  color:rgba(255,255,255,.75);
+  opacity:.8;
   font-size:18px;
 }
 
-/* ============ SECCIONES ============ */
+/* ===================== SECCIONES ===================== */
 section{
-  padding:100px 10%;
+  padding:100px 8%;
 }
 
-.section-title{
+.title{
   font-size:42px;
   margin-bottom:20px;
 }
 
-.subtitle{
+.sub{
   color:var(--muted);
   max-width:700px;
   line-height:1.6;
 }
 
-/* ============ CARDS ============ */
+/* ===================== GRID ===================== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -112,10 +91,10 @@ section{
 }
 
 .card{
-  background:var(--white);
+  background:var(--card);
   border:1px solid var(--line);
-  border-radius:18px;
-  padding:24px;
+  padding:26px;
+  border-radius:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.05);
   transition:.3s;
 }
@@ -127,11 +106,10 @@ section{
 }
 
 .card h3{
-  color:var(--ocean);
-  margin-bottom:10px;
+  color:var(--blue);
 }
 
-/* ============ KPI ============ */
+/* ===================== KPI ===================== */
 .kpi{
   display:flex;
   gap:20px;
@@ -141,42 +119,37 @@ section{
 
 .kpi div{
   flex:1;
-  min-width:200px;
-  background:var(--sand);
+  min-width:220px;
+  background:white;
+  border:1px solid var(--line);
   padding:30px;
   border-radius:16px;
   text-align:center;
 }
 
 .kpi strong{
-  font-size:36px;
+  font-size:34px;
   color:var(--gold);
   display:block;
 }
 
-/* ============ CTA ============ */
+/* ===================== CTA ===================== */
 .cta{
-  background:var(--ocean);
+  background:var(--dark);
   color:white;
   text-align:center;
-  padding:80px 10%;
+  padding:90px 20px;
 }
 
-.button{
+.btn{
   display:inline-block;
   margin-top:20px;
   padding:16px 32px;
   background:var(--gold);
-  color:#111;
-  border-radius:40px;
-  font-weight:600;
+  color:black;
+  border-radius:50px;
   text-decoration:none;
-}
-
-/* ============ FIX JS FALLBACK ============ */
-.no-js *{
-  opacity:1 !important;
-  transform:none !important;
+  font-weight:600;
 }
 
 </style>
@@ -185,30 +158,28 @@ section{
 <body>
 
 <!-- HERO -->
-<div class="hero reveal">
+<div class="hero">
   <div>
     <h1>Más propiedades.<br><span>Más reservas.</span><br>Más inversores.</h1>
-    <p>Sistemas de captación y conversión para real estate en Punta del Este y mercados premium.</p>
+    <p>Sistemas de captación y conversión para inmobiliarias en Punta del Este y mercados premium.</p>
   </div>
 </div>
 
 <!-- PROBLEMA -->
-<section class="reveal">
-  <h2 class="section-title">El problema no es la demanda.</h2>
-  <p class="subtitle">
-    El problema es que la mayoría de inmobiliarias no tiene sistemas para capturarla, calificarla y convertirla.
-  </p>
+<section>
+  <h2 class="title">El problema no es la demanda.</h2>
+  <p class="sub">La mayoría de inmobiliarias pierde dinero por falta de sistemas de seguimiento y conversión.</p>
 
   <div class="kpi">
-    <div><strong>80%</strong> Sin sistema digital real</div>
-    <div><strong>54%</strong> Marketing básico sin automatización</div>
-    <div><strong>26%</strong> Leads perdidos por falta de seguimiento</div>
+    <div><strong>80%</strong> sin sistema digital</div>
+    <div><strong>54%</strong> marketing básico</div>
+    <div><strong>26%</strong> leads perdidos</div>
   </div>
 </section>
 
 <!-- SISTEMA -->
-<section class="reveal">
-  <h2 class="section-title">Sistema de conversión</h2>
+<section>
+  <h2 class="title">Sistema completo</h2>
 
   <div class="grid">
     <div class="card">
@@ -218,50 +189,22 @@ section{
 
     <div class="card">
       <h3>IA Conversacional</h3>
-      Responde, filtra y califica leads automáticamente
+      Responde y califica leads automáticamente
     </div>
 
     <div class="card">
-      <h3>CRM Inteligente</h3>
-      Seguimiento automático hasta la conversión
+      <h3>CRM</h3>
+      Seguimiento hasta cierre
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<div class="cta reveal">
-  <h2>¿Querés ver cómo está tu sistema hoy?</h2>
-  <p>Te hago un diagnóstico completo sin costo.</p>
-  <a class="button" href="#">Agendar diagnóstico</a>
+<div class="cta">
+  <h2>¿Querés ver tu sistema hoy?</h2>
+  <p>Te hago un diagnóstico gratis</p>
+  <a class="btn" href="#">Agendar diagnóstico</a>
 </div>
-
-<script>
-
-/* ============ FIX CRÍTICO: asegurar visibilidad ============ */
-document.addEventListener("DOMContentLoaded", () => {
-
-  const els = document.querySelectorAll(".reveal");
-
-  // fallback inmediato si no hay scroll/intersection
-  els.forEach(el => el.classList.add("visible"));
-
-  // intento animación si hay soporte
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add("visible");
-      }
-    });
-  },{threshold:0.15});
-
-  els.forEach(el=>{
-    el.classList.add("js-on");
-    io.observe(el);
-  });
-
-});
-
-</script>
 
 </body>
 </html>
