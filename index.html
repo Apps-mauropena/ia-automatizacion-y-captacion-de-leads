@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mauro Peña — Sistemas de Captación & Conversión para Real Estate · Punta del Este</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --bg:        #FBFAF7;
+  --bg-sand:   #F4F0E7;
+  --ink:       #10141F;
+  --ink-soft:  #5B6472;
+  --ink-faint: #9AA0AC;
+  --line:      #E4DFD3;
+  --line-soft: #ECE8DC;
+  --clay:      #B0764A;
+  --clay-soft: #E8D6BE;
+  --clay-pale: #F6ECDD;
+  --gold:      #B8924A;
+  --gold-soft: #D9C18A;
+  --gold-line: rgba(184,146,74,0.32);
+  --deep:      #14181C;
+  --glass:     rgba(255,255,255,0.6);
+  --glass-edge:rgba(255,255,255,0.9);
+  --shadow:    0 30px 60px -30px rgba(16,20,31,0.18);
+  --ease:      cubic-bezier(.16,.84,.24,1);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+}
+
+h1,h2,h3{margin:0; font-weight:800; letter-spacing:-0.02em;}
+h1, .head h2, #hero h1, #cierre blockquote, .quote-big{
+  font-family:'Playfair Display',Georgia,'Times New Roman',serif;
+  font-weight:700; letter-spacing:-0.01em;
+}
+p{margin:0;}
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--clay);
+}
+.eyebrow::before{
+  content:""; width:18px; height:1px; background:var(--clay);
+}
+
+.wrap{
+  max-width:1140px; margin:0 auto; padding:0 8vw;
+}
+@media(max-width:780px){ .wrap{padding:0 28px;} }
+
+/* ============ SCROLL PROGRESS ============ */
+#progress{
+  position:fixed; top:0; left:0; height:2px; width:0%;
+  background:var(--clay); z-index:90; transition:width .08s linear;
+}
+
+/* ============ SIDE NAV ============ */
+#dotnav{
+  position:fixed; right:26px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:14px; z-index:80;
+}
+#dotnav a{
+  width:7px; height:7px; border-radius:50%;
+  background:var(--line); display:block; position:relative;
+  transition:background .3s var(--ease), transform .3s var(--ease);
+}
+#dotnav a.active{ background:var(--clay); transform:scale(1.5); }
+#dotnav a span{
+  position:absolute; right:18px; top:50%; transform:translateY(-50%);
+  white-space:nowrap; font-size:11px; color:var(--ink-soft);
+  opacity:0; transition:opacity .2s var(--ease); pointer-events:none;
+  background:var(--bg); padding:2px 4px;
+}
+#dotnav a:hover span{opacity:1;}
+@media(max-width:900px){ #dotnav{display:none;} }
+
+/* ============ WORDMARK ============ */
+#mark{
+  position:fixed; top:26px; left:8vw; z-index:80;
+  font-size:13px; font-weight:700; letter-spacing:.04em;
+  display:flex; align-items:center; gap:8px;
+  color:#fff; transition:color .4s var(--ease);
+}
+#mark.dark{ color:var(--ink); }
+#mark .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-soft); transition:background .4s var(--ease);}
+#mark.dark .dot{ background:var(--clay); }
+@media(max-width:780px){ #mark{left:28px;} }
+
+/* ============ SECTIONS ============ */
+.panel{
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative;
+  padding:120px 0 100px;
+}
+.panel.sand{ background:var(--bg-sand); }
+.panel.tight{ min-height:auto; padding:90px 0; }
+
+.reveal{
+  opacity:0; transform:translateY(30px);
+  transition:opacity 1.25s var(--ease), transform 1.25s var(--ease);
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal.d1{transition-delay:.12s;}
+.reveal.d2{transition-delay:.24s;}
+.reveal.d3{transition-delay:.36s;}
+.reveal.d4{transition-delay:.48s;}
+.reveal.d5{transition-delay:.60s;}
+
+hr.fine{ border:none; border-top:1px solid var(--line); margin:0; }
+
+/* ============ HERO ============ */
+#hero{ padding-top:0; position:relative; overflow:hidden; color:#fff; }
+#hero .hero-bg{
+  position:absolute; inset:0; z-index:0;
+  background:var(--deep);
+}
+#hero .hero-bg img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  opacity:0; transform:scale(1.12);
+  animation:heroZoom 9s var(--ease) forwards;
+}
+@keyframes heroZoom{ to{ opacity:1; transform:scale(1); } }
+#hero .hero-bg::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(105deg, rgba(10,14,20,0.82) 0%, rgba(10,14,20,0.55) 45%, rgba(10,14,20,0.30) 100%);
+}
+#hero .wrap{ position:relative; z-index:2; }
+#hero .stage{
+  display:flex; flex-direction:column; align-items:flex-start; gap:30px;
+}
+#hero h1{
+  font-size:clamp(44px,7vw,86px); line-height:1.02; color:#fff;
+  text-shadow:0 2px 40px rgba(0,0,0,0.25);
+}
+#hero h1 em{ color:var(--gold-soft); font-style:normal; font-weight:700; }
+#hero .eyebrow{ color:var(--gold-soft); }
+#hero .eyebrow::before{ background:var(--gold-soft); }
+#hero .role{
+  font-size:clamp(15px,1.7vw,19px); color:rgba(255,255,255,0.85); font-weight:400;
+  max-width:540px; line-height:1.6;
+}
+#hero .role .signature{ display:inline-block; margin-top:16px; font-size:13px; font-weight:500; color:var(--gold-soft); letter-spacing:.02em; }
+#hero .tag-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.tag{
+  font-size:12px; font-weight:500; letter-spacing:.04em;
+  padding:8px 16px; border-radius:30px;
+  color:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+}
+.skyline-wrap{ width:100%; margin-top:54px; }
+.skyline-wrap svg{ width:100%; display:block; }
+.skyline-path{
+  fill:none; stroke:rgba(255,255,255,0.7); stroke-width:1.1; opacity:.6;
+  stroke-dasharray:2400; stroke-dashoffset:2400;
+  transition:stroke-dashoffset 2.4s var(--ease);
+}
+.is-visible .skyline-path{ stroke-dashoffset:0; }
+.skyline-sun{ fill:var(--gold-soft); opacity:0; transition:opacity 1.4s var(--ease) .6s; }
+.is-visible .skyline-sun{ opacity:.9; }
+
+.scrollcue{
+  position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:.14em; color:rgba(255,255,255,0.7); text-transform:uppercase;
+}
+.scrollcue .line{ width:1px; height:34px; background:linear-gradient(to bottom, rgba(255,255,255,0.7), transparent); animation:cue 1.8s ease-in-out infinite; }
+@keyframes cue{ 0%,100%{transform:scaleY(.6); opacity:.4;} 50%{transform:scaleY(1); opacity:1;} }
+
+/* ============ HEADERS ============ */
+.head{ max-width:760px; margin-bottom:64px; }
+.head h2{ font-size:clamp(30px,4.2vw,48px); margin-top:14px; line-height:1.08; }
+.head .lede{ margin-top:18px; font-size:17px; color:var(--ink-soft); line-height:1.6; max-width:600px; }
+
+/* ============ MERCADO (before/after) ============ */
+.split{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:18px; overflow:hidden; }
+.split > div{ padding:42px 38px; }
+.split .before{ background:var(--bg); border-right:1px solid var(--line); }
+.split .after{ background:var(--ink); color:#fff; }
+.split h3{ font-size:13px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; opacity:.6; margin-bottom:22px; }
+.split .after h3{ color:var(--clay-soft); opacity:1;}
+.split ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
+.split li{ font-size:16.5px; display:flex; align-items:baseline; gap:10px; }
+.split .before li::before{ content:"–"; color:var(--ink-faint); }
+.split .after li::before{ content:"+"; color:var(--clay); font-weight:700; }
+.split .year{ font-size:42px; font-weight:800; margin-bottom:6px; letter-spacing:-0.02em; }
+@media(max-width:780px){ .split{grid-template-columns:1fr;} .split .before{border-right:none; border-bottom:1px solid var(--line);} }
+
+.insight-line{
+  margin-top:30px; font-size:20px; font-weight:600; line-height:1.5; max-width:640px;
+}
+.insight-line .strike{ color:var(--ink-faint); text-decoration:line-through; font-weight:500; }
+.insight-line .win{ color:var(--clay); }
+
+/* ============ PROBLEMA — leaky funnel ============ */
+.problem-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center; }
+@media(max-width:900px){ .problem-grid{grid-template-columns:1fr; gap:36px;} }
+.leak-list{ display:flex; flex-direction:column; gap:22px; }
+.leak-item{ display:flex; gap:16px; align-items:flex-start; }
+.leak-item .ico{ width:34px; height:34px; flex:none; }
+.leak-item .t{ font-size:16px; font-weight:600; }
+.leak-item .d{ font-size:14px; color:var(--ink-soft); margin-top:3px; line-height:1.5;}
+
+/* ============ ECOSYSTEM ORBIT ============ */
+.orbit-stage{
+  position:relative; width:min(560px,86vw); height:min(560px,86vw); margin:0 auto;
+}
+.orbit-core{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:148px; height:148px; border-radius:50%;
+  background:var(--ink); color:#fff;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; z-index:5; box-shadow:var(--shadow);
+}
+.orbit-core .nm{ font-size:14px; font-weight:700; letter-spacing:.01em; }
+.orbit-core .rl{ font-size:9.5px; color:var(--clay-soft); margin-top:4px; letter-spacing:.06em; text-transform:uppercase; }
+.orbit-ring{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  border:1px dashed var(--line); border-radius:50%;
+}
+.orbit-node{
+  position:absolute; width:96px; height:96px; border-radius:50%;
+  background:var(--glass); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-edge);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; text-align:center; line-height:1.25; padding:8px;
+  box-shadow:0 18px 40px -22px rgba(16,20,31,0.25);
+  animation:floaty 6s ease-in-out infinite;
+}
+.orbit-node svg{ width:20px; height:20px; margin-bottom:5px; }
+@keyframes floaty{ 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-9px);} }
+
+/* ============ PIPELINE (numbered, real sequence) ============ */
+.pipeline{ display:flex; align-items:stretch; gap:0; }
+.pipe-step{ flex:1; position:relative; padding:0 18px; text-align:left; }
+.pipe-step .num{ font-size:13px; color:var(--clay); font-weight:700; letter-spacing:.06em; }
+.pipe-step .ttl{ font-size:19px; font-weight:700; margin-top:10px; }
+.pipe-step .dsc{ font-size:13.5px; color:var(--ink-soft); margin-top:8px; line-height:1.5; }
+.pipe-rail{ position:relative; height:2px; background:var(--line); margin:0 0 38px; border-radius:2px; overflow:hidden; }
+.pipe-rail .fill{ position:absolute; inset:0; width:0%; background:var(--clay); transition:width 1.6s var(--ease); }
+.is-visible .pipe-rail .fill{ width:100%; }
+.pipe-dots{ display:flex; justify-content:space-between; margin-top:-9px; }
+.pipe-dots span{ width:9px; height:9px; border-radius:50%; background:var(--bg); border:2px solid var(--line); display:block; }
+@media(max-width:900px){ .pipeline{flex-direction:column; gap:30px;} .pipe-step{padding:0;} .pipe-rail,.pipe-dots{display:none;} }
+
+/* ============ MAP ============ */
+.map-wrap{ display:grid; grid-template-columns:1.3fr 1fr; gap:54px; align-items:center; }
+@media(max-width:900px){ .map-wrap{grid-template-columns:1fr; gap:32px;} }
+.map-svg{ width:100%; }
+.mx-shape{ fill:var(--bg-sand); stroke:var(--line); stroke-width:1.4; }
+.pin{ cursor:pointer; }
+.pin circle.dot{ fill:var(--clay); }
+.pin circle.pulse{ fill:none; stroke:var(--clay); stroke-width:1.2; opacity:.55; animation:pulse 2.6s ease-out infinite; }
+.pin text{ font-size:11px; font-weight:700; fill:var(--ink); }
+@keyframes pulse{ 0%{ r:6; opacity:.6;} 100%{ r:18; opacity:0;} }
+.market-cards{ display:flex; flex-direction:column; gap:14px; }
+.market-card{
+  border:1px solid var(--line); border-radius:14px; padding:18px 20px;
+  display:flex; flex-direction:column; gap:4px; transition:border-color .25s, background .25s;
+}
+.market-card .city{ font-weight:700; font-size:16px; }
+.market-card .seg{ font-size:13.5px; color:var(--ink-soft); }
+.market-card.is-active{ border-color:var(--clay); background:var(--clay-pale); }
+
+/* ============ GEO ICON ROW ============ */
+.geo-flow{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:42px; }
+.geo-pill{
+  display:flex; align-items:center; gap:10px;
+  border:1px solid var(--line); border-radius:40px; padding:12px 20px 12px 14px;
+  font-size:14px; font-weight:600;
+}
+.geo-pill svg{ width:22px; height:22px; }
+.geo-arrow{ align-self:center; color:var(--ink-faint); font-size:18px; }
+.geo-result{ text-align:center; font-size:21px; font-weight:700; }
+.geo-result span{ color:var(--clay); }
+
+/* ============ FUNNEL (captación) ============ */
+.fun-flow{ display:flex; flex-direction:column; gap:0; align-items:center; }
+.fun-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+.fun-chip{
+  border:1px solid var(--line); border-radius:10px; padding:14px 18px;
+  font-size:14px; font-weight:600; background:var(--bg);
+}
+.fun-down{ width:1px; height:34px; background:var(--line); margin:14px 0; position:relative; }
+.fun-down::after{ content:"›"; position:absolute; bottom:-12px; left:50%; transform:translate(-50%,0) rotate(90deg); color:var(--clay); font-size:18px; font-weight:700; }
+.fun-big{
+  border:1px solid var(--ink); border-radius:12px; padding:18px 30px;
+  font-size:15px; font-weight:700; background:var(--ink); color:#fff;
+}
+
+/* ============ AUTOMATION TIMELINE ============ */
+.timeline{ display:flex; flex-wrap:wrap; gap:0; }
+.tl-step{ flex:1; min-width:150px; padding:0 16px 16px; border-left:1px solid var(--line); position:relative; }
+.tl-step:first-child{ border-left:none; }
+.tl-step .dot{ width:10px; height:10px; border-radius:50%; background:var(--clay); position:absolute; left:-5px; top:0; }
+.tl-step .lbl{ font-size:14.5px; font-weight:700; margin-left:14px; }
+.tl-step .sub{ font-size:12.5px; color:var(--ink-soft); margin-left:14px; margin-top:6px; line-height:1.5; }
+@media(max-width:900px){ .timeline{flex-direction:column; gap:22px;} .tl-step{border-left:1px solid var(--line); padding-left:18px;} }
+
+/* ============ LOOP (reactivacion) ============ */
+.loop-wrap{ display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; }
+.loop-node{ border:1px solid var(--line); border-radius:50px; padding:13px 22px; font-size:14px; font-weight:600; }
+.loop-arrow{ color:var(--clay); font-size:20px; }
+
+/* ============ ZONES (Playa del Carmen) ============ */
+.zone-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media(max-width:900px){ .zone-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:600px){ .zone-grid{grid-template-columns:1fr;} }
+.zone-card{
+  border:1px solid var(--line); border-radius:18px; padding:26px 22px;
+  display:flex; flex-direction:column; gap:14px; background:var(--bg);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+}
+.zone-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); border-color:var(--line-soft); }
+.zone-card svg{ width:30px; height:30px; }
+.zone-card h4{ font-size:18px; font-weight:700; margin:0; }
+.zone-card .p{ font-size:13px; color:var(--ink-soft); line-height:1.55; }
+.zone-card .tags{ display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; }
+.zone-card .tags span{ font-size:11px; font-weight:600; color:var(--clay); background:var(--clay-pale); padding:4px 9px; border-radius:20px; }
+
+/* ============ RESULTADOS ============ */
+.kpi-row{ display:flex; gap:0; border:1px solid var(--line); border-radius:18px; overflow:hidden; }
+.kpi{ flex:1; padding:34px 24px; border-right:1px solid var(--line); text-align:center; }
+.kpi:last-child{ border-right:none; }
+.kpi .num{ font-size:clamp(34px,5vw,52px); font-weight:800; color:var(--clay); letter-spacing:-0.02em; }
+.kpi .lbl{ font-size:13px; color:var(--ink-soft); margin-top:6px; font-weight:600; }
+.kpi-note{ text-align:center; font-size:12.5px; color:var(--ink-faint); margin-top:18px; font-style:italic; max-width:680px; margin-left:auto; margin-right:auto; line-height:1.6; }
+.kpi .src{ display:block; font-size:11px; font-weight:500; color:var(--ink-faint); margin-top:5px; font-style:italic; }
+@media(max-width:780px){ .kpi-row{flex-direction:column;} .kpi{border-right:none; border-bottom:1px solid var(--line);} .kpi:last-child{border-bottom:none;} }
+
+/* ============ APORTO checklist ============ */
+.aporto-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media(max-width:900px){ .aporto-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:600px){ .aporto-grid{grid-template-columns:1fr;} }
+.aporto-card{ border:1px solid var(--line); border-radius:16px; padding:22px; display:flex; gap:14px; align-items:flex-start; }
+.aporto-card svg{ width:22px; height:22px; flex:none; margin-top:2px; color:var(--clay); }
+.aporto-card .t{ font-size:15px; font-weight:600; line-height:1.45; }
+
+/* ============ CIERRE ============ */
+#cierre{ text-align:center; }
+#cierre blockquote{
+  font-size:clamp(24px,3.6vw,38px); font-weight:700; line-height:1.32; max-width:780px; margin:0 auto;
+}
+#cierre blockquote em{ color:var(--gold); font-style:normal; font-weight:800; }
+#cierre .by{ margin-top:38px; font-size:14px; color:var(--ink-soft); }
+#cierre .by b{ color:var(--ink); }
+
+.quote-big{
+  font-size:clamp(22px,3vw,32px); font-weight:700; line-height:1.4; max-width:760px;
+  margin:28px auto 0; color:var(--ink);
+}
+
+footer{ padding:40px 0 60px; text-align:center; font-size:12px; color:var(--ink-faint); }
+
+/* ============ DIGITAL PRESENCE BARS ============ */
+.digi-bars{ display:flex; flex-direction:column; gap:26px; max-width:720px; margin:0 auto; }
+.digi-row{ display:grid; grid-template-columns:160px 1fr 64px; align-items:center; gap:18px; }
+.digi-row .lbl{ font-size:14.5px; font-weight:700; }
+.digi-row .lbl small{ display:block; font-size:12px; font-weight:500; color:var(--ink-soft); margin-top:2px; }
+.digi-track{ height:14px; border-radius:8px; background:var(--line-soft); overflow:hidden; }
+.digi-fill{ height:100%; width:0%; border-radius:8px; background:var(--clay); transition:width 1.5s var(--ease); }
+.digi-row.media .digi-fill{ background:#C7A572; }
+.digi-row.baja .digi-fill{ background:#D9D2C1; }
+.digi-pct{ font-size:20px; font-weight:800; text-align:right; }
+.digi-source{ text-align:center; font-size:12px; color:var(--ink-faint); margin-top:26px; font-style:italic; }
+
+/* ============ SEGMENT BRIDGE CARDS ============ */
+.seg-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media(max-width:900px){ .seg-grid{grid-template-columns:1fr;} }
+.seg-card{ border:1px solid var(--line); border-radius:18px; padding:28px 24px; display:flex; flex-direction:column; gap:12px; }
+.seg-card .tag-mini{ font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); }
+.seg-card h4{ font-size:18px; font-weight:700; margin:0; }
+.seg-card p{ font-size:14px; color:var(--ink-soft); line-height:1.55; }
+
+/* ============ BUYER LIST (quién está comprando) ============ */
+.buyer-list{ display:flex; flex-direction:column; gap:4px; max-width:740px; margin:0 auto; }
+.buyer-item{ display:flex; gap:18px; align-items:flex-start; padding:20px 4px; border-bottom:1px solid var(--line); }
+.buyer-item:last-child{ border-bottom:none; }
+.buyer-item .ic{ width:44px; height:44px; flex:none; border-radius:50%; background:var(--clay-pale); display:flex; align-items:center; justify-content:center; }
+.buyer-item .ic svg{ width:21px; height:21px; }
+.buyer-item .t{ font-size:16px; font-weight:700; }
+.buyer-item .d{ font-size:13.5px; color:var(--ink-soft); margin-top:4px; line-height:1.55; }
+
+/* ============ CTA BUTTON ============ */
+.cta-btn{ display:inline-block; margin-top:28px; padding:18px 36px; border-radius:50px; background:var(--ink); color:#fff; font-weight:700; font-size:15px; letter-spacing:.01em; }
+.cta-perks{ display:flex; flex-direction:column; gap:10px; max-width:480px; margin:30px auto 0; text-align:left; }
+.cta-perks div{ display:flex; gap:10px; font-size:14.5px; align-items:flex-start; }
+.cta-perks div::before{ content:"✓"; color:var(--clay); font-weight:700; }
+
+/* ============ BOOKING FORM ============ */
+.book-form{ max-width:560px; margin:38px auto 0; border:1px solid var(--line); border-radius:20px; padding:36px 32px; background:var(--bg); text-align:left; }
+.book-step{ margin-bottom:26px; }
+.book-step:last-of-type{ margin-bottom:0; }
+.book-label{ font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px; }
+.book-label span{ font-weight:500; text-transform:none; letter-spacing:0; color:var(--ink-faint); margin-left:6px; }
+.book-options{ display:flex; gap:8px; flex-wrap:wrap; }
+.book-option{ font-family:inherit; border:1px solid var(--line); background:var(--bg); border-radius:30px; padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer; color:var(--ink); transition:all .2s var(--ease); }
+.book-option:hover{ border-color:var(--clay); }
+.book-option.selected{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.book-fields{ display:flex; gap:12px; flex-wrap:wrap; }
+.book-input{ flex:1; min-width:180px; font-family:inherit; border:1px solid var(--line); border-radius:10px; padding:13px 16px; font-size:14px; color:var(--ink); background:var(--bg); }
+.book-input:focus{ outline:none; border-color:var(--clay); }
+.book-submit{ width:100%; margin-top:30px; padding:16px; border:none; border-radius:50px; background:var(--ink); color:#fff; font-weight:700; font-size:15px; font-family:inherit; cursor:pointer; transition:opacity .2s; }
+.book-submit:hover{ opacity:.88; }
+.book-error{ color:#B0473D; font-size:13px; margin-top:14px; text-align:center; }
+.book-confirm{ max-width:560px; margin:38px auto 0; text-align:center; padding:36px 32px; border:1px solid var(--line); border-radius:20px; background:var(--bg); }
+.book-confirm .check{ width:44px; height:44px; border-radius:50%; background:var(--clay-pale); color:var(--clay); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:20px; font-weight:700; }
+.book-confirm .msg{ font-size:15px; line-height:1.6; color:var(--ink); }
+.book-reset{ margin-top:18px; background:none; border:none; font-family:inherit; font-size:13px; color:var(--ink-faint); text-decoration:underline; cursor:pointer; }
+@media(max-width:600px){ .book-form, .book-confirm{ padding:28px 22px; } }
+
+/* ============ PHOTO ZONES (real Punta del Este imagery) ============ */
+.photo-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+@media(max-width:900px){ .photo-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:600px){ .photo-grid{grid-template-columns:1fr;} }
+.photo-zone{ position:relative; border-radius:18px; overflow:hidden; aspect-ratio:4/3; background:var(--clay-pale); border:1px solid var(--line); }
+.photo-zone img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s var(--ease); }
+.photo-zone:hover img{ transform:scale(1.06); }
+.photo-zone .cap{ position:absolute; left:0; right:0; bottom:0; padding:16px 18px; background:linear-gradient(to top, rgba(16,20,31,0.68), transparent); }
+.photo-zone .cap h4{ font-size:15px; font-weight:700; margin:0; color:#fff; }
+.photo-zone .cap p{ font-size:11.5px; margin-top:3px; color:rgba(255,255,255,0.85); }
+
+/* ============ PROFILE CARD (placeholder avatar) ============ */
+.profile-card{
+  display:flex; align-items:center; gap:18px; max-width:560px; margin:0 auto 14px; width:100%;
+  border:1px solid rgba(255,255,255,0.08); background:var(--ink); cursor:pointer; padding:14px 18px;
+  border-radius:18px; text-align:left; font-family:inherit;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  animation:pcGlow 3.2s ease-in-out infinite;
+}
+.profile-card:hover{ transform:translateY(-2px); }
+.profile-card.is-open{ animation:none; box-shadow:0 0 0 0 rgba(184,146,74,0); }
+@keyframes pcGlow{
+  0%,100%{ box-shadow:0 14px 30px -16px rgba(16,20,31,.5), 0 0 0 0 rgba(184,146,74,0.0); }
+  50%{ box-shadow:0 14px 30px -16px rgba(16,20,31,.5), 0 0 26px 4px rgba(184,146,74,0.32); }
+}
+.profile-card .profile-info .name{ font-size:17px; font-weight:700; color:#ffffff; }
+.profile-card .profile-info .role{ font-size:12.5px; color:rgba(255,255,255,0.6); margin-top:2px; }
+.profile-card .profile-info .ver-bio{ font-size:11.5px; color:var(--gold-soft); font-weight:600; margin-top:6px; display:flex; align-items:center; gap:5px; }
+.profile-card .pc-chevron{ flex:none; width:16px; height:16px; color:rgba(255,255,255,0.45); transition:transform .5s cubic-bezier(.16,.84,.24,1), color .3s; animation:pcBounce 1.8s ease-in-out infinite; }
+.profile-card.is-open .pc-chevron{ transform:rotate(180deg); color:var(--gold-soft); animation:none; }
+@keyframes pcBounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(4px); } }
+.profile-card .avatar{ width:96px; height:124px; flex:none; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px -12px rgba(0,0,0,.5); border:2px solid var(--gold-soft); cursor:zoom-in; position:relative; }
+.profile-card .avatar::after{ content:"⤢"; position:absolute; bottom:5px; right:5px; width:20px; height:20px; background:rgba(255,255,255,0.18); color:#fff; border-radius:5px; font-size:12px; display:flex; align-items:center; justify-content:center; }
+.profile-card .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+.profile-card .profile-info{ text-align:left; flex:1; }
+
+/* ============ BIO PANEL (mismo mecanismo de apertura premium) ============ */
+.bio-panel{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .65s cubic-bezier(.16,.84,.24,1); max-width:560px; margin:0 auto; }
+.bio-panel.open{ grid-template-rows:1fr; }
+.bio-panel-inner{ overflow:hidden; min-height:0; }
+.bio-card{
+  border:1px solid var(--line); border-radius:20px; padding:30px 32px; margin-top:8px; text-align:left;
+  background:var(--bg); opacity:0; transform:translateY(-10px) scale(.98); filter:blur(3px);
+  transition:opacity .5s ease .12s, transform .55s cubic-bezier(.16,.84,.24,1) .12s, filter .5s ease .12s;
+}
+.bio-panel.open .bio-card{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+.bio-card .bio-top{ display:flex; gap:18px; align-items:flex-start; margin-bottom:18px; }
+.bio-card .bio-photo{ width:108px; height:138px; flex:none; border-radius:14px; overflow:hidden; border:2px solid var(--clay); box-shadow:0 14px 30px -16px rgba(16,20,31,.35); cursor:zoom-in; position:relative; }
+.bio-card .bio-photo::after{ content:"⤢"; position:absolute; bottom:6px; right:6px; width:22px; height:22px; background:rgba(16,20,31,0.55); color:#fff; border-radius:5px; font-size:13px; display:flex; align-items:center; justify-content:center; }
+.bio-card .bio-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.bio-card .bio-meta .bio-name{ font-size:18px; font-weight:700; }
+.bio-card .bio-meta .bio-tag{ font-size:12.5px; color:var(--clay); font-weight:600; margin-top:3px; }
+.bio-card .bio-meta .bio-sub{ font-size:12px; color:var(--ink-soft); margin-top:5px; line-height:1.5; }
+.bio-card .bio-text{ font-size:13.5px; color:var(--ink-soft); line-height:1.65; margin-bottom:18px; }
+.bio-card .bio-skills{ display:flex; flex-wrap:wrap; gap:7px; }
+.bio-card .bio-skills span{ font-size:11px; font-weight:600; color:var(--ink); background:var(--clay-pale); padding:5px 11px; border-radius:20px; }
+
+/* ============ LIGHTBOX (foto en grande) ============ */
+.lightbox{
+  position:fixed; inset:0; z-index:200; background:rgba(10,12,16,0.88);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transition:opacity .35s var(--ease);
+  padding:40px;
+}
+.lightbox.open{ opacity:1; visibility:visible; }
+.lightbox img{
+  max-width:min(480px,86vw); max-height:80vh; border-radius:16px;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.5);
+  transform:scale(.92); transition:transform .35s var(--ease);
+}
+.lightbox.open img{ transform:scale(1); }
+.lightbox .lightbox-close{
+  position:absolute; top:24px; right:28px; width:40px; height:40px; border-radius:50%;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:20px; cursor:pointer;
+}
+
+/* ============ UNFOLD (closed by default, opens on click — premium expand) ============ */
+.book-toggle{ width:100%; display:flex; align-items:center; gap:16px; border:1px solid var(--line); border-radius:20px; background:var(--bg); padding:22px 26px; cursor:pointer; font-family:inherit; text-align:left; transition:border-color .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease); }
+.book-toggle:hover{ border-color:var(--clay); box-shadow:0 18px 36px -22px rgba(16,20,31,.28); transform:translateY(-2px); }
+.book-toggle .bt-icon{ width:46px; height:46px; flex:none; border-radius:50%; background:var(--clay-pale); display:flex; align-items:center; justify-content:center; transition:background .3s var(--ease); }
+.book-toggle .bt-icon svg{ width:22px; height:22px; stroke:var(--clay); }
+.book-toggle.is-open .bt-icon{ background:var(--ink); }
+.book-toggle.is-open .bt-icon svg{ stroke:#fff; }
+.book-toggle .bt-text{ flex:1; display:flex; flex-direction:column; gap:3px; }
+.book-toggle .bt-title{ font-size:15.5px; font-weight:700; color:var(--ink); }
+.book-toggle .bt-sub{ font-size:12.5px; color:var(--ink-soft); }
+.book-toggle .bt-chevron{ flex:none; width:16px; height:16px; color:var(--ink-faint); transition:transform .5s cubic-bezier(.16,.84,.24,1); }
+.book-toggle.is-open .bt-chevron{ transform:rotate(180deg); color:var(--clay); }
+
+.book-panel{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .65s cubic-bezier(.16,.84,.24,1); }
+.book-panel.open{ grid-template-rows:1fr; }
+.book-panel-inner{ overflow:hidden; min-height:0; }
+.book-panel-inner .book-form{ opacity:0; transform:translateY(-10px) scale(.98); filter:blur(3px); transition:opacity .5s ease .12s, transform .55s cubic-bezier(.16,.84,.24,1) .12s, filter .5s ease .12s; }
+.book-panel.open .book-panel-inner .book-form{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="mark"><span class="dot"></span>MP</div>
+<nav id="dotnav"></nav>
+
+<!-- ================= HERO ================= -->
+<section class="panel" id="hero">
+  <div class="hero-bg">
+    <img src="mauro.puntadeleste.jpg" alt="Punta del Este">
+  </div>
+  <div class="wrap stage reveal">
+    <span class="eyebrow">Sistemas de Captación &amp; Conversión para Real Estate · Maldonado, Uruguay</span>
+    <h1>Más propietarios.<br>Más reservas.<br><em>Más compradores internacionales.</em></h1>
+    <p class="role">No te vendo anuncios. Te instalo un sistema que atrae, califica y le da seguimiento a tus prospectos —automáticamente— hasta que están listos para comprar, invertir o reservar.<br><span class="signature">— Mauro Peña · Sistemas de Captación &amp; Conversión para Real Estate</span></p>
+    <div class="tag-row">
+      <span class="tag">Más Propietarios</span>
+      <span class="tag">Más Reservas Directas</span>
+      <span class="tag">Más Compradores Internacionales</span>
+      <span class="tag">Seguimiento 24/7 con IA</span>
+    </div>
+  </div>
+  <div class="skyline-wrap wrap reveal d2">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+      <circle class="skyline-sun" cx="44" cy="14" r="9"></circle>
+      <path class="skyline-path" d="M40,190 L40,40 L44,40 L44,28 L40,28 L40,20 L44,20 L44,10 L48,10 L48,190
+        M85,190 L100,150 L115,190 M125,190 L142,138 L159,190
+        M230,190 L230,68 L250,68 L250,190 M260,190 L260,46 L280,46 L280,190 M295,190 L295,90 L315,90 L315,190
+        M340,190 L340,148 L400,148 L400,190 M412,190 L412,165 L462,165 L462,190
+        M648,190 L648,158 L690,190 M664,190 L664,168
+        M780,190 L780,58 L800,58 L800,190 M814,190 L814,88 L834,88 L834,190
+        M870,190 C920,184 970,192 1020,187 C1080,182 1140,190 1200,185" />
+      <path class="skyline-path" style="stroke-dasharray:1400; stroke-dashoffset:1400; transition-delay:.4s;" d="M0,205 C150,198 300,208 450,202 C620,196 760,206 920,200 C1030,196 1120,202 1200,198" opacity="0.35"/>
+    </svg>
+  </div>
+  <div class="scrollcue"><span>desliza</span><span class="line"></span></div>
+</section>
+
+<!-- ================= DESAFÍO ================= -->
+<section class="panel sand" id="desafio">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 50px;">
+      <span class="eyebrow">El contexto · 100 empresas analizadas</span>
+      <h2>El 80% de las inmobiliarias en Maldonado todavía vende como en 2015.</h2>
+      <p class="lede" style="margin:18px auto 0;">Analizamos individualmente 100 empresas del mercado de Punta del Este y Maldonado. La mayoría tiene Instagram. Casi ninguna tiene un sistema que convierta turistas e inversores en clientes.</p>
+    </div>
+    <div class="digi-bars reveal d1">
+      <div class="digi-row alta">
+        <div class="lbl">Presencia Alta<small>Anuncios activos, CRM y embudos</small></div>
+        <div class="digi-track"><div class="digi-fill" data-target="20" style="width:0%"></div></div>
+        <div class="digi-pct">20%</div>
+      </div>
+      <div class="digi-row media">
+        <div class="lbl">Presencia Media<small>Web e Instagram, sin publicidad estructurada</small></div>
+        <div class="digi-track"><div class="digi-fill" data-target="54" style="width:0%"></div></div>
+        <div class="digi-pct">54%</div>
+      </div>
+      <div class="digi-row baja">
+        <div class="lbl">Presencia Baja<small>Webs desactualizadas, redes muertas</small></div>
+        <div class="digi-track"><div class="digi-fill" data-target="26" style="width:0%"></div></div>
+        <div class="digi-pct">26%</div>
+      </div>
+    </div>
+    <p class="digi-source">Base: relevamiento propio sobre 100 inmobiliarias, administradoras de Airbnb y desarrollos en Maldonado.</p>
+    <p class="insight-line reveal d2" style="margin-left:auto; margin-right:auto; text-align:center;"><span class="strike">No es un problema de poca demanda turística.</span><br>Es un problema de <span class="win">sistemas que no la capturan.</span></p>
+  </div>
+</section>
+
+<!-- ================= EL DINERO SE PIERDE ================= -->
+<section class="panel" id="perdida">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 50px;">
+      <span class="eyebrow">El problema más caro del sector</span>
+      <h2>El dinero se pierde después del primer mensaje.</h2>
+      <p class="lede" style="margin:18px auto 0;">Los compradores de alto valor casi nunca compran de inmediato. Muchas operaciones tardan entre 3 y 12 meses en cerrarse. En ese tiempo, la mayoría de las inmobiliarias pierde al prospecto por simple falta de seguimiento.</p>
+    </div>
+    <div class="geo-flow reveal d1">
+      <div class="geo-pill">Atracción de Prospectos</div><span class="geo-arrow">→</span>
+      <div class="geo-pill">IA Conversacional</div><span class="geo-arrow">→</span>
+      <div class="geo-pill">Calificación Automática</div><span class="geo-arrow">→</span>
+      <div class="geo-pill">CRM</div><span class="geo-arrow">→</span>
+      <div class="geo-pill">Seguimiento Inteligente</div><span class="geo-arrow">→</span>
+      <div class="geo-pill">Agendamiento</div><span class="geo-arrow">→</span>
+      <div class="geo-pill" style="border-color:var(--clay); color:var(--clay); font-weight:700;">Venta o Reserva</div>
+    </div>
+    <p class="geo-result reveal d2">El diferencial no está en conseguir el primer contacto. Está en <span>no soltarlo durante los meses que sigue</span>.</p>
+  </div>
+</section>
+
+<!-- ================= IA CONVERSACIONAL ================= -->
+<section class="panel sand" id="ia">
+  <div class="wrap" style="text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow">El diferenciador</span>
+      <h2 style="margin-top:14px;">IA Conversacional para Real Estate</h2>
+    </div>
+    <blockquote class="quote-big reveal d1">"Mientras tu equipo duerme, una IA entrenada para tu empresa responde consultas, califica prospectos, agenda reuniones y realiza seguimiento automático hasta que el cliente esté listo para comprar, invertir o reservar."</blockquote>
+    <div class="tag-row reveal d2" style="justify-content:center; margin-top:34px;">
+      <span class="tag">Responde en segundos, no en horas</span>
+      <span class="tag">Califica antes de pasar al equipo</span>
+      <span class="tag">Agenda visitas automáticamente</span>
+      <span class="tag">Sigue al prospecto durante meses</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUIÉN ESTÁ COMPRANDO ================= -->
+<section class="panel" id="compradores">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 46px;">
+      <span class="eyebrow">El comprador real</span>
+      <h2>Quién está comprando en Maldonado hoy.</h2>
+      <p class="lede" style="margin:18px auto 0;">La oportunidad no está en conseguir más clics. Está en llegar al comprador correcto.</p>
+    </div>
+    <div class="buyer-list reveal d1">
+      <div class="buyer-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.6"><path d="M12 3l7 3.2v5.3c0 5-3.2 8-7 9-3.8-1-7-4-7-9V6.2L12 3Z"/></svg></span>
+        <div><div class="t">Inversores argentinos</div><div class="d">Buscan proteger patrimonio, diversificar fuera de Argentina y adquirir una segunda residencia en un mercado estable.</div></div>
+      </div>
+      <div class="buyer-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.6"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-2"/></svg></span>
+        <div><div class="t">Uruguayos que viven en el exterior</div><div class="d">Muchos planean su regreso para retirarse o invertir en una propiedad frente al mar con alta calidad de vida.</div></div>
+      </div>
+      <div class="buyer-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.6"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span>
+        <div><div class="t">Empresarios y profesionales de Montevideo</div><div class="d">Cada vez más personas trasladan su residencia principal a Maldonado buscando seguridad, servicios, conectividad y mejor calidad de vida.</div></div>
+      </div>
+      <div class="buyer-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.6"><path d="M4 19V13M10 19V9M16 19V5"/><path d="M3 19h18"/></svg></span>
+        <div><div class="t">Compradores brasileños</div><div class="d">Uno de los segmentos internacionales de mayor crecimiento, especialmente en propiedades premium y segunda residencia.</div></div>
+      </div>
+      <div class="buyer-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c3 3 3 14.9 0 17M12 3.5c-3 3-3 14.9 0 17"/></svg></span>
+        <div><div class="t">Compradores internacionales</div><div class="d">Norteamericanos y europeos atraídos por la estabilidad jurídica, seguridad y ventajas fiscales de Uruguay.</div></div>
+      </div>
+    </div>
+    <p class="insight-line reveal d2" style="text-align:center; margin:36px auto 0;">El desafío no es que estos compradores existan.<br>El desafío es construir <span class="win">sistemas capaces de encontrarlos, calificarlos y acompañarlos</span> hasta la decisión de compra.</p>
+  </div>
+</section>
+
+<!-- ================= SEGMENTOS (bridge) ================= -->
+<section class="panel sand" id="segmentos">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Tres perfiles, tres estrategias</span>
+      <h2>No le vendo lo mismo a todos. Cada modelo de negocio pierde dinero de forma distinta.</h2>
+    </div>
+    <div class="seg-grid reveal d1">
+      <div class="seg-card">
+        <span class="tag-mini">Prioridad Élite</span>
+        <h4>Administradores de Airbnb</h4>
+        <p>Dependés de una plataforma que se queda con el 15% de cada reserva — y cada propietario nuevo cuesta más conseguirlo.</p>
+      </div>
+      <div class="seg-card">
+        <span class="tag-mini">Prioridad Muy Alta</span>
+        <h4>Real Estate de Lujo</h4>
+        <p>El comprador con capital real para propiedades de más de US$1.000.000 no está buscando desde Punta del Este — está afuera.</p>
+      </div>
+      <div class="seg-card">
+        <span class="tag-mini">Prioridad Alta</span>
+        <h4>Inmobiliarias Tradicionales</h4>
+        <p>Tu stock es grande, pero tu red de agentes recibe pocos prospectos calificados nuevos cada día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AIRBNB ================= -->
+<section class="panel" id="airbnb">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Prioridad Élite — Administradores de Airbnb &amp; Property Management</span>
+      <h2>Generá reservas directas, además de Airbnb.</h2>
+      <p class="lede">Airbnb te sigue llenando el calendario — eso no cambia. La diferencia es que también construís una base de huéspedes propia y sumás reservas que no le pagan comisión a nadie.</p>
+    </div>
+    <div class="split reveal d1">
+      <div class="before">
+        <div class="year">Vía Airbnb</div>
+        <h3>Lo que ya tenés</h3>
+        <ul>
+          <li>15% de comisión en cada reserva</li>
+          <li>Cero datos propios del huésped</li>
+          <li>Cartera de propietarios estancada</li>
+        </ul>
+      </div>
+      <div class="after">
+        <div class="year">Sumando</div>
+        <h3>Lo que instalo</h3>
+        <ul>
+          <li>Embudo de Meta Ads para captar propietarios nuevos</li>
+          <li>Google Ads para reservas directas en tu propia web</li>
+          <li>Base de huéspedes propia para remarketing</li>
+        </ul>
+      </div>
+    </div>
+    <p class="insight-line reveal d2">El objetivo no es reemplazar Airbnb. Es <span class="win">diversificar de dónde vienen tus reservas</span> y quedarte con los datos del huésped.</p>
+  </div>
+</section>
+
+<!-- ================= LUJO ================= -->
+<section class="panel sand" id="lujo">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 50px;">
+      <span class="eyebrow">Prioridad Muy Alta — Real Estate de Lujo</span>
+      <h2>Las propiedades premium no se venden compitiendo en portales.<br>Se venden llegando al comprador correcto antes que la competencia.</h2>
+      <p class="lede" style="margin:18px auto 0;">Propiedades de más de US$1.000.000 necesitan compradores con capital real — no curiosos locales navegando un portal.</p>
+    </div>
+    <div class="fun-flow reveal d1">
+      <div class="fun-row">
+        <div class="fun-chip">Buenos Aires</div>
+        <div class="fun-chip">São Paulo</div>
+        <div class="fun-chip">Miami</div>
+        <div class="fun-chip">Madrid</div>
+        <div class="fun-chip">Montevideo</div>
+      </div>
+      <div class="fun-down"></div>
+      <div class="fun-chip">Instagram segmentado por capital e intención</div>
+      <div class="fun-down"></div>
+      <div class="fun-chip">Google Ads de búsqueda — español, portugués e inglés</div>
+      <div class="fun-down"></div>
+      <div class="fun-big">Punta del Este — Comprador Calificado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRADICIONALES ================= -->
+<section class="panel" id="tradicional">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Prioridad Alta — Inmobiliarias y Franquicias</span>
+      <h2>Tu stock es grande. El problema es que tus agentes no reciben leads nuevos todos los días.</h2>
+      <p class="lede">Mover un volumen alto de propiedades en venta y alquiler anual exige alimentar constantemente a la red de agentes con prospectos calificados — no solo publicar el inventario y esperar.</p>
+    </div>
+    <div class="fun-flow reveal d1">
+      <div class="fun-chip">Meta Ads — formulario instantáneo</div>
+      <div class="fun-down"></div>
+      <div class="fun-chip">Landing Page por proyecto o zona</div>
+      <div class="fun-down"></div>
+      <div class="fun-chip">CRM</div>
+      <div class="fun-down"></div>
+      <div class="fun-chip">Agente asignado automáticamente</div>
+      <div class="fun-down"></div>
+      <div class="fun-big">Visita → Cierre</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METODOLOGÍA ================= -->
+<section class="panel sand" id="metodologia">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Cómo trabajo</span>
+      <h2>Cuatro pasos. Resultados medibles desde el primer mes.</h2>
+    </div>
+    <div class="reveal d1">
+      <div class="pipe-rail"><div class="fill"></div></div>
+      <div class="pipe-dots"><span></span><span></span><span></span><span></span></div>
+      <div class="pipeline">
+        <div class="pipe-step"><div class="num">01</div><div class="ttl">Diagnóstico</div><div class="dsc">Auditoría completa de tu presencia digital y la de tu competencia directa en la zona.</div></div>
+        <div class="pipe-step"><div class="num">02</div><div class="ttl">Diseño de embudo</div><div class="dsc">Arquitectura de campañas, landing pages y automatización de WhatsApp a la medida de tu modelo de negocio.</div></div>
+        <div class="pipe-step"><div class="num">03</div><div class="ttl">Ejecución</div><div class="dsc">Lanzamiento de campañas en Meta y Google, conectadas a tu CRM desde el día uno.</div></div>
+        <div class="pipe-step"><div class="num">04</div><div class="ttl">Optimización de ROI</div><div class="dsc">Ajuste semanal basado en costo por lead y tasa de cierre reales — no en suposiciones.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONAS DESTACADAS ================= -->
+<section class="panel" id="zonas">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 44px;">
+      <span class="eyebrow">Lo que estás vendiendo</span>
+      <h2>El mercado existe. La visibilidad no siempre.</h2>
+      <p class="lede" style="margin:18px auto 0;">Punta del Este concentra algunos de los activos inmobiliarios más deseados de América Latina: La Mansa, La Brava, La Península, José Ignacio, Punta Ballena, Solanas.</p>
+    </div>
+    <div class="photo-grid reveal d1">
+      <div class="photo-zone">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mansa_Beach_Punta_del_Este_Uruguay.JPG" alt="La Mansa, Punta del Este" loading="lazy" onerror="this.style.display='none'">
+        <div class="cap"><h4>La Mansa</h4><p>Bahía calma, torres de lujo</p></div>
+      </div>
+      <div class="photo-zone">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Playa_Brava,_Punta_del_Este,_Uruguay.jpg" alt="La Brava, Punta del Este" loading="lazy" onerror="this.style.display='none'">
+        <div class="cap"><h4>La Brava</h4><p>Frente oceánico, ícono de la península</p></div>
+      </div>
+      <div class="photo-zone">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Playa_de_José_Ignacio.JPG" alt="José Ignacio, Maldonado" loading="lazy" onerror="this.style.display='none'">
+        <div class="cap"><h4>José Ignacio</h4><p>Exclusividad, casas de autor</p></div>
+      </div>
+      <div class="photo-zone">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Punta_del_Este_Skyline_-_200120-0171-jikatu-Pano.jpg" alt="Skyline de Punta del Este" loading="lazy" onerror="this.style.display='none'">
+        <div class="cap"><h4>La Península</h4><p>Skyline de torres modernas</p></div>
+      </div>
+    </div>
+    <p class="digi-source">Fotografías: Wikimedia Commons (CC BY-SA).</p>
+    <p class="insight-line reveal d2" style="text-align:center; max-width:680px; margin:34px auto 0;">El problema no es la calidad del producto.<br>El problema es que <span class="win">muchos compradores potenciales nunca llegan a hablar con un asesor.</span></p>
+    <p class="lede" style="margin:16px auto 0; max-width:560px; text-align:center;">Por eso construyo sistemas que convierten tráfico, consultas y visitantes en oportunidades reales de negocio.</p>
+  </div>
+</section>
+
+<!-- ================= POR QUÉ AHORA ================= -->
+<section class="panel sand" id="porque-ahora">
+  <div class="wrap">
+    <div class="head reveal" style="text-align:center; margin:0 auto 40px;">
+      <span class="eyebrow">Por qué ahora</span>
+      <h2>El mercado se está moviendo, con o sin vos.</h2>
+    </div>
+    <div class="cta-perks reveal d1" style="max-width:600px; margin:0 auto;">
+      <div>Maldonado registró más de 9.400 compraventas en 2025</div>
+      <div>Es el segundo mercado inmobiliario más activo de Uruguay</div>
+      <div>El turismo continúa impulsando la llegada de nuevos compradores e inversores</div>
+      <div>La competencia digital sigue siendo sorprendentemente baja</div>
+    </div>
+    <p class="digi-source">Fuente: Instituto Nacional de Estadística (INE), Boletín de Indicadores de Actividad Inmobiliaria, 2025.</p>
+    <p class="insight-line reveal d2" style="text-align:center; margin:30px auto 0;">La demanda ya está llegando a Maldonado.<br><span class="win">La pregunta es si está llegando a tu negocio.</span></p>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="panel" id="cta">
+  <div class="wrap reveal" style="text-align:center;">
+    <span class="eyebrow">Empecemos</span>
+    <h2 style="font-size:clamp(28px,4vw,42px); margin-top:14px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.18;">Antes de invertir en publicidad, conviene saber exactamente dónde estás parado.</h2>
+    <p class="lede" style="margin:18px auto 0;">Sesión de diagnóstico gratuita de 15 minutos — sin costo, sin compromiso.</p>
+    <div class="cta-perks">
+      <div>Reviso tu presencia digital actual</div>
+      <div>Te muestro cómo te comparás frente a otras inmobiliarias de la zona</div>
+      <div>Te dejo un plan de acción concreto, lo contrates o no</div>
+    </div>
+    <div class="cta-stack reveal d1">
+      <button type="button" class="profile-card" id="bioToggle" aria-expanded="false">
+        <div class="avatar">
+          <img src="mauro-perfil.jpg" alt="Mauro Peña" class="zoomable" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div class="profile-info">
+          <div class="name">Mauro Peña</div>
+          <div class="role">Sistemas de Captación &amp; Conversión para Real Estate</div>
+          <div class="ver-bio">Ver trayectoria y habilidades ↓</div>
+        </div>
+        <svg class="pc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="bio-panel" id="bioPanel">
+        <div class="bio-panel-inner">
+          <div class="bio-card">
+            <div class="bio-top">
+              <div class="bio-photo"><img src="mauro-perfil.jpg" alt="Mauro Peña" class="zoomable" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+              <div class="bio-meta">
+                <div class="bio-name">Mauro Peña</div>
+                <div class="bio-tag">Nacido en Maldonado, Uruguay · 31 años</div>
+                <div class="bio-sub">+5 años de experiencia en marketing digital</div>
+              </div>
+            </div>
+            <p class="bio-text">Empezó como Gerente de Marketing en una institución educativa en Ciudad de México, y desde ahí pasó a publicidad para agencias inmobiliarias en México. Hoy aplica ese mismo sistema a su mercado de origen: Punta del Este y Maldonado. En actualización constante, porque la IA avanza más rápido que cualquier otra herramienta de marketing en la historia.</p>
+            <div class="bio-skills">
+              <span>IA &amp; Chatbots</span>
+              <span>Meta Ads</span>
+              <span>Google Ads</span>
+              <span>Diseño Web &amp; Landing Pages</span>
+              <span>SEO &amp; Posicionamiento en IA (ChatGPT, Gemini)</span>
+              <span>CapCut · DaVinci · Photoshop · Canva</span>
+              <span>Audio &amp; Voz con IA</span>
+              <span>CRM &amp; Automatización</span>
+              <span>Email Marketing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="book-toggle" id="bookToggle" aria-expanded="false">
+        <span class="bt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <span class="bt-text">
+          <span class="bt-title">Reservá tu diagnóstico con Mauro</span>
+          <span class="bt-sub">Elegí día y horario · 15 minutos, sin costo</span>
+        </span>
+        <svg class="bt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="book-panel" id="bookPanel">
+        <div class="book-panel-inner">
+      <div class="book-form" id="bookForm">
+        <div class="book-step">
+        <div class="book-label">Elegí el día</div>
+        <div class="book-options" id="dayOptions">
+          <button type="button" class="book-option" data-day="Lunes">Lunes</button>
+          <button type="button" class="book-option" data-day="Martes">Martes</button>
+          <button type="button" class="book-option" data-day="Miércoles">Miércoles</button>
+          <button type="button" class="book-option" data-day="Jueves">Jueves</button>
+          <button type="button" class="book-option" data-day="Viernes">Viernes</button>
+        </div>
+      </div>
+      <div class="book-step">
+        <div class="book-label">Elegí el horario<span>12:00 a 17:00 hs</span></div>
+        <div class="book-options" id="timeOptions">
+          <button type="button" class="book-option" data-time="12:00 PM">12:00 PM</button>
+          <button type="button" class="book-option" data-time="1:00 PM">1:00 PM</button>
+          <button type="button" class="book-option" data-time="2:00 PM">2:00 PM</button>
+          <button type="button" class="book-option" data-time="3:00 PM">3:00 PM</button>
+          <button type="button" class="book-option" data-time="4:00 PM">4:00 PM</button>
+        </div>
+      </div>
+      <div class="book-step">
+        <div class="book-label">Tus datos</div>
+        <div class="book-fields">
+          <input type="text" id="bookName" class="book-input" placeholder="Nombre">
+          <input type="text" id="bookContact" class="book-input" placeholder="WhatsApp o email">
+        </div>
+      </div>
+      <button type="button" class="book-submit" id="bookSubmit">Reservar mi diagnóstico con Mauro</button>
+      <p class="book-error" id="bookError" style="display:none;">Elegí día, horario y dejá un dato de contacto antes de confirmar.</p>
+      </div>
+        </div>
+      </div>
+    </div>
+    <div class="book-confirm" id="bookConfirm" style="display:none;">
+      <div class="check">✓</div>
+      <div class="msg" id="bookConfirmMsg"></div>
+      <button type="button" class="book-reset" id="bookReset">Reservar otro horario</button>
+    </div>
+    <div class="by" style="margin-top:50px;"><b>Mauro Peña</b> — Sistemas de Captación &amp; Conversión para Real Estate</div>
+  </div>
+</section>
+
+<footer>Hecho a mano, sin plantillas. Maldonado, Uruguay — 2026.</footer>
+
+<div class="lightbox" id="lightbox">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+  <img id="lightboxImg" src="" alt="Mauro Peña">
+</div>
+
+<script>
+/* ---------- reveal on scroll ---------- */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); } });
+},{threshold:0.18});
+revealEls.forEach(el=>io.observe(el));
+
+/* ---------- scroll progress bar ---------- */
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const pct = (h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = pct + '%';
+}
+document.addEventListener('scroll', updateProgress);
+updateProgress();
+
+/* ---------- wordmark contrast over dark hero ---------- */
+const mark = document.getElementById('mark');
+const heroSection = document.getElementById('hero');
+function updateMark(){
+  const heroBottom = heroSection.getBoundingClientRect().bottom;
+  mark.classList.toggle('dark', heroBottom < 70);
+}
+document.addEventListener('scroll', updateMark);
+updateMark();
+
+/* ---------- side dot nav ---------- */
+const sections = document.querySelectorAll('section.panel');
+const dotnav = document.getElementById('dotnav');
+const niceNames = {
+  hero:'Inicio', desafio:'Desafío', perdida:'Seguimiento', ia:'IA', compradores:'Comprador', segmentos:'Segmentos', airbnb:'Airbnb',
+  lujo:'Lujo', tradicional:'Tradicionales', metodologia:'Metodología', zonas:'Zonas', 'porque-ahora':'Por qué ahora', cta:'Empecemos'
+};
+sections.forEach(sec=>{
+  const a = document.createElement('a');
+  a.href = '#' + sec.id;
+  const span = document.createElement('span');
+  span.textContent = niceNames[sec.id] || sec.id;
+  a.appendChild(span);
+  dotnav.appendChild(a);
+});
+const dotLinks = dotnav.querySelectorAll('a');
+const navIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      dotLinks.forEach(l=>l.classList.remove('active'));
+      const idx = [...sections].indexOf(e.target);
+      if(dotLinks[idx]) dotLinks[idx].classList.add('active');
+    }
+  });
+},{threshold:0.5});
+sections.forEach(s=>navIo.observe(s));
+
+/* ---------- digital presence bars ---------- */
+const digiFills = document.querySelectorAll('.digi-fill');
+const digiIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      digiFills.forEach(el=>{ el.style.width = el.dataset.target + '%'; });
+      digiIo.disconnect();
+    }
+  });
+},{threshold:0.3});
+const digiBars = document.querySelector('.digi-bars');
+if(digiBars) digiIo.observe(digiBars);
+
+/* ---------- booking form ---------- */
+/* ---------- bio panel toggle ---------- */
+const bioToggle = document.getElementById('bioToggle');
+const bioPanel = document.getElementById('bioPanel');
+bioToggle.addEventListener('click', ()=>{
+  const willOpen = !bioPanel.classList.contains('open');
+  bioPanel.classList.toggle('open', willOpen);
+  bioToggle.classList.toggle('is-open', willOpen);
+  bioToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+});
+
+const bookToggle = document.getElementById('bookToggle');
+const bookPanel = document.getElementById('bookPanel');
+bookToggle.addEventListener('click', ()=>{
+  const willOpen = !bookPanel.classList.contains('open');
+  bookPanel.classList.toggle('open', willOpen);
+  bookToggle.classList.toggle('is-open', willOpen);
+  bookToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  if(willOpen){
+    setTimeout(()=>{ bookPanel.scrollIntoView({behavior:'smooth', block:'center'}); }, 300);
+  }
+});
+
+let selectedDay = null, selectedTime = null;
+const dayBtns = document.querySelectorAll('#dayOptions .book-option');
+const timeBtns = document.querySelectorAll('#timeOptions .book-option');
+dayBtns.forEach(b=>b.addEventListener('click', ()=>{
+  dayBtns.forEach(x=>x.classList.remove('selected'));
+  b.classList.add('selected');
+  selectedDay = b.dataset.day;
+}));
+timeBtns.forEach(b=>b.addEventListener('click', ()=>{
+  timeBtns.forEach(x=>x.classList.remove('selected'));
+  b.classList.add('selected');
+  selectedTime = b.dataset.time;
+}));
+
+const bookForm = document.getElementById('bookForm');
+const bookConfirm = document.getElementById('bookConfirm');
+const bookError = document.getElementById('bookError');
+
+document.getElementById('bookSubmit').addEventListener('click', ()=>{
+  const name = document.getElementById('bookName').value.trim();
+  const contact = document.getElementById('bookContact').value.trim();
+  if(!selectedDay || !selectedTime || !contact){
+    bookError.style.display = 'block';
+    return;
+  }
+  bookError.style.display = 'none';
+  bookForm.style.display = 'none';
+  document.getElementById('bookConfirmMsg').textContent =
+    (name ? name + ', ' : '') + 'tu diagnóstico quedó pre-agendado para el ' + selectedDay + ' a las ' + selectedTime + '. Mauro te va a confirmar el horario exacto por ' + contact + '.';
+  bookConfirm.style.display = 'block';
+});
+
+document.getElementById('bookReset').addEventListener('click', ()=>{
+  selectedDay = null; selectedTime = null;
+  dayBtns.forEach(x=>x.classList.remove('selected'));
+  timeBtns.forEach(x=>x.classList.remove('selected'));
+  document.getElementById('bookName').value = '';
+  document.getElementById('bookContact').value = '';
+  bookConfirm.style.display = 'none';
+  bookForm.style.display = '';
+});
+</script>
+</body>
+</html>
